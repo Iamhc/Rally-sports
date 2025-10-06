@@ -1,13 +1,28 @@
 "use client";
 
 import Image from "next/image";
+
+export type Event = {
+  id: number;
+  title: string;
+  sport: string;
+  organizer: string;
+  location: string;
+  description: string;
+  joining: { id: string; name: string }[];
+  dates: { id: string; label: string }[];
+  image: string;
+  lovedCount?: number;
+};
+
 import { EVENTS } from "./Data/Events";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 
 export default function Home() {
   const [screen, setScreen] = useState("explore");
-  const [selectedEvent, setSelectedEvent] = useState(null);
+  const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
+
   const [selectedDate, setSelectedDate] = useState(null);
   const [booking, setBooking] = useState(null);
   const filters = ["All", "Tennis", "Football", "Basketball", "Most Loved"];
@@ -41,7 +56,7 @@ export default function Home() {
     return () => clearInterval(interval);
   }, [headings.length]);
 
-  function selectEvent(e) {
+  function selectEvent(e: Event) {
     setSelectedEvent(e);
     setScreen("details");
   }
