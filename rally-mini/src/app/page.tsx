@@ -202,23 +202,25 @@ export default function Home() {
           />
 
           <div className="bg-white rounded-2xl shadow p-4 mt-3 sm:p-6">
-            <h2 className="text-xl sm:text-2xl font-semibold">
+            <h2 className="text-xl sm:text-2xl font-semibold text-black sm:text-current">
               {selectedEvent.title}
             </h2>
-            <p className="text-sm sm:text-base text-gray-500">
+            <p className="text-sm sm:text-base text-black sm:text-gray-500">
               {selectedEvent.organizer} · {selectedEvent.location}
             </p>
-            <p className="mt-3 text-gray-600">{selectedEvent.description}</p>
+            <p className="mt-3 text-black sm:text-gray-600">
+              {selectedEvent.description}
+            </p>
 
             <div className="mt-4">
-              <h3 className="text-sm sm:text-base font-medium text-gray-700">
+              <h3 className="text-sm sm:text-base font-medium text-black sm:text-gray-700">
                 {"Who's joining"}
               </h3>
               <div className="flex gap-2 mt-2 flex-wrap">
                 {selectedEvent.joining.map((u) => (
                   <div
                     key={u.id}
-                    className="px-3 py-2 bg-gray-100 rounded-full text-sm sm:text-base"
+                    className="px-3 py-2 bg-gray-100 rounded-full text-sm sm:text-base text-black sm:text-current"
                   >
                     {u.name}
                   </div>
@@ -227,7 +229,7 @@ export default function Home() {
             </div>
 
             <div className="mt-4">
-              <h3 className="text-sm sm:text-base font-medium text-gray-700">
+              <h3 className="text-sm sm:text-base font-medium text-black sm:text-gray-700">
                 Choose a date
               </h3>
               <div className="flex gap-2 mt-2 flex-wrap">
@@ -238,7 +240,7 @@ export default function Home() {
                     className={`px-3 py-2 rounded-full text-sm sm:text-base ${
                       selectedDate?.id === d.id
                         ? "bg-black text-white"
-                        : "bg-gray-100 text-gray-700"
+                        : "bg-gray-100 text-black sm:text-gray-700"
                     }`}
                   >
                     {d.label}
