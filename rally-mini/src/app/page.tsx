@@ -106,10 +106,14 @@ export default function Home() {
                 transition={{ duration: 0.8 }}
                 className="text-2xl sm:text-3xl font-bold text-center"
               >
-                <span className={headings[currentHeading].color}>
+                {/* Highlighted part */}
+                <span className={`${headings[currentHeading].color}`}>
                   {headings[currentHeading].highlight}
                 </span>
-                {headings[currentHeading].text}
+                {/* Normal part */}
+                <span className="text-gray-900">
+                  {headings[currentHeading].text}
+                </span>
               </motion.h1>
             </AnimatePresence>
           </div>
@@ -161,13 +165,16 @@ export default function Home() {
                   height={320}
                   className="rounded-xl w-full h-48 sm:h-64 object-cover"
                 />
-                <h2 className="text-lg sm:text-xl font-semibold mt-2">
+                {/* Event Title */}
+                <h2 className="text-lg sm:text-xl font-semibold mt-2 text-black sm:text-gray-900">
                   {e.title}
                 </h2>
+                {/* Organizer & Location */}
                 <p className="text-sm sm:text-base text-gray-500">
                   {e.organizer} · {e.location}
                 </p>
-                <p className="text-sm sm:text-base text-gray-400 mt-1">
+                {/* Game/Sport Name */}
+                <p className="text-sm sm:text-base mt-1 text-black sm:text-gray-400">
                   {e.sport}
                 </p>
               </motion.div>
