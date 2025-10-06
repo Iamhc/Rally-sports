@@ -1,4 +1,17 @@
-export const EVENTS = [
+export type Event = {
+  id: number;
+  title: string;
+  sport: string;
+  organizer: string;
+  location: string;
+  description: string;
+  joining: { id: string; name: string }[];
+  dates: { id: string; label: string }[];
+  image: string;
+  lovedCount?: number;
+};
+
+export const EVENTS: Event[] = [
   {
     id: 1,
     title: "Morning Tennis Doubles",
@@ -14,7 +27,7 @@ export const EVENTS = [
     ],
     image:
       "https://images.unsplash.com/photo-1554068865-24cecd4e34b8?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    lovedCount: 25, // optional, for "Most Loved"
+    lovedCount: 25,
   },
   {
     id: 2,
