@@ -1,33 +1,30 @@
 "use client";
 
 import Image from "next/image";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { EVENTS, Event } from "./Data/Events";
 
-export type Event = {
-  id: number;
-  title: string;
-  sport: string;
-  organizer: string;
-  location: string;
-  description: string;
-  joining: { id: string; name: string }[];
-  dates: { id: string; label: string }[];
-  image: string;
-  lovedCount?: number;
+export type Booking = {
+  event: Event;
+  date: { id: string; label: string } | null;
 };
 
-import { EVENTS } from "./Data/Events";
-import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
-
 export default function Home() {
-  const [screen, setScreen] = useState("explore");
+  const [screen, setScreen] = useState<
+    "explore" | "details" | "checkout" | "confirmation"
+  >("explore");
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
+  const [selectedDate, setSelectedDate] = useState<{
+    id: string;
+    label: string;
+  } | null>(null);
+  const [booking, setBooking] = useState<Booking | null>(null);
 
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [booking, setBooking] = useState(null);
   const filters = ["All", "Tennis", "Football", "Basketball", "Most Loved"];
   const [sportFilter, setSportFilter] = useState("All");
   const [query, setQuery] = useState("");
+
   const headings = [
     {
       highlight: "Rally",
@@ -46,9 +43,9 @@ export default function Home() {
     },
     { highlight: "Discover", text: " Fun Activities", color: "text-pink-500" },
   ];
-
   const [currentHeading, setCurrentHeading] = useState(0);
 
+  // Rotate headings every 3 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentHeading((prev) => (prev + 1) % headings.length);
@@ -62,6 +59,7 @@ export default function Home() {
   }
 
   function proceedToCheckout() {
+    if (!selectedEvent || !selectedDate) return; // safety
     setBooking({ event: selectedEvent, date: selectedDate });
     setScreen("checkout");
   }
@@ -82,33 +80,16 @@ export default function Home() {
     setSportFilter("All");
     setScreen("explore");
   }
-  // Compute filteredEvents only once
-  let filteredEvents = (() => {
-    if (sportFilter === "Most Loved") {
-      // Sort by lovedCount descending
-      return [...EVENTS].sort(
-        (a, b) => (b.lovedCount || 0) - (a.lovedCount || 0)
-      );
-    } else {
-      // Filter by sport + search query
-      return EVENTS.filter(
-        (e) =>
-          (sportFilter === "All" || e.sport === sportFilter) &&
-          e.title.toLowerCase().includes(query.toLowerCase())
-      );
-    }
-  })();
 
-  // If "Most Loved" is selected, sort by lovedCount descending
-  if (sportFilter === "Most Loved") {
-    filteredEvents = [...EVENTS].sort((a, b) => b.lovedCount - a.lovedCount);
-  } else {
-    filteredEvents = EVENTS.filter(
-      (e) =>
-        (sportFilter === "All" || e.sport === sportFilter) &&
-        e.title.toLowerCase().includes(query.toLowerCase())
-    );
-  }
+  // Filter events
+  const filteredEvents =
+    sportFilter === "Most Loved"
+      ? [...EVENTS].sort((a, b) => (b.lovedCount || 0) - (a.lovedCount || 0))
+      : EVENTS.filter(
+          (e) =>
+            (sportFilter === "All" || e.sport === sportFilter) &&
+            e.title.toLowerCase().includes(query.toLowerCase())
+        );
 
   return (
     <div className="min-h-screen bg-gray-50 p-4 font-sans max-w-3xl mx-auto">
@@ -131,8 +112,6 @@ export default function Home() {
                 {headings[currentHeading].text}
               </motion.h1>
             </AnimatePresence>
-
-            {/* optional underline */}
           </div>
 
           <input
