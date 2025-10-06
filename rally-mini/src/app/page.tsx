@@ -123,7 +123,7 @@ export default function Home() {
             placeholder="Search events..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="w-full border border-gray-200 rounded-xl p-2 mb-3 sm:p-3"
+            className="w-full border border-gray-200 rounded-xl p-2 mb-3 sm:p-3 placeholder-gray-600 sm:placeholder-gray-400"
           />
 
           <div className="flex gap-2 mb-4 overflow-x-auto">
