@@ -188,7 +188,7 @@ export default function Home() {
         <>
           <button
             onClick={resetSelection}
-            className="text-sm sm:text-base text-blue-600 mb-2"
+            className="text-sm sm:text-base text-black mb-2"
           >
             ← Back to Explore
           </button>
@@ -269,7 +269,7 @@ export default function Home() {
         <div>
           <button
             onClick={() => setScreen("details")}
-            className="text-sm sm:text-base text-blue-600 mb-2"
+            className="text-sm sm:text-base text-black mb-2"
           >
             ← Back
           </button>
