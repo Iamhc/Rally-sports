@@ -211,7 +211,7 @@ export default function Home() {
 
             <div className="mt-4">
               <h3 className="text-sm sm:text-base font-medium text-gray-700">
-                Who's joining
+                {"Who's joining"}
               </h3>
               <div className="flex gap-2 mt-2 flex-wrap">
                 {selectedEvent.joining.map((u) => (
@@ -236,7 +236,7 @@ export default function Home() {
                     onClick={() => setSelectedDate(d)}
                     className={`px-3 py-2 rounded-full text-sm sm:text-base ${
                       selectedDate?.id === d.id
-                        ? "bg-blue-600 text-white"
+                        ? "bg-black text-white"
                         : "bg-gray-100 text-gray-700"
                     }`}
                   >
@@ -251,7 +251,7 @@ export default function Home() {
               onClick={proceedToCheckout}
               className={`mt-5 w-full py-2 rounded-xl font-medium ${
                 selectedDate
-                  ? "bg-blue-600 text-white"
+                  ? "bg-black text-white"
                   : "bg-gray-300 text-gray-500 cursor-not-allowed"
               }`}
             >
@@ -284,7 +284,7 @@ export default function Home() {
             </p>
             <button
               onClick={confirmBooking}
-              className="mt-5 w-full py-2 rounded-xl font-medium bg-green-600 text-white"
+              className="mt-5 w-full py-2 rounded-xl font-medium bg-black text-white"
             >
               Confirm Booking
             </button>
@@ -296,7 +296,7 @@ export default function Home() {
       {screen === "confirmation" && (
         <div className="text-center mt-10">
           <h2 className="text-2xl sm:text-3xl font-bold text-green-600">
-            ✅ Booking Confirmed!
+            Booking Confirmed!
           </h2>
           <p className="mt-2 text-gray-600">
             You&apos;ve joined <strong>{booking?.event?.title}</strong>
@@ -307,7 +307,7 @@ export default function Home() {
 
           <button
             onClick={resetSelection}
-            className="mt-5 bg-blue-600 text-white px-4 py-2 rounded-xl text-sm sm:text-base"
+            className="mt-5 bg-black text-white px-4 py-2 rounded-xl text-sm sm:text-base"
           >
             Back to Explore
           </button>
