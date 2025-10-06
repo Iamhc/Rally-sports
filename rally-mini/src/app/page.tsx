@@ -37,11 +37,9 @@ export default function Home() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentHeading((prev) => (prev + 1) % headings.length);
-    }, 3000); // change every 3 seconds
+    }, 3000);
     return () => clearInterval(interval);
-  }, []);
-
-  const sports = ["All", "Tennis", "Football", "Basketball"];
+  }, [headings.length]);
 
   function selectEvent(e) {
     setSelectedEvent(e);
@@ -301,7 +299,7 @@ export default function Home() {
             ✅ Booking Confirmed!
           </h2>
           <p className="mt-2 text-gray-600">
-            You’ve joined <strong>{booking?.event?.title}</strong>
+            You&apos;ve joined <strong>{booking?.event?.title}</strong>
           </p>
           <p className="text-gray-500 mt-1">
             {booking?.date?.label} · {booking?.event?.location}
